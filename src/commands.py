@@ -132,7 +132,11 @@ def cmd_details(message):
 def cmd_rulings(message):
     global last_card
     if last_card is not None:
-        return cards.get_card_rulings(message, last_card)
+        response = cards.get_card_rulings(message, last_card)
+        if len(response) > 500:
+            response = 'The incantations are too long; read the yourself'
+        else:
+            return response
     else:
         return 'You must divine a single entity first.'
 
